@@ -1,0 +1,7 @@
+singles.overview:
+  path: '/admin/content/singles'
+  defaults:
+    _controller: '\Drupal\singles\Controller\OverviewController::overview'
+    _title:  'Singles'
+  requirements:
+    _permission: 'access content overview'

@@ -1,0 +1,5 @@
+singles.overview:
+  route_name : singles.overview
+  title: Singles
+  base_route: system.admin_content
+  weight: 10

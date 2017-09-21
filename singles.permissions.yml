@@ -1,0 +1,4 @@
+administer singles:
+  title: 'administer singles'
+  description: 'Allows, among others, to delete single nodes'
+  restrict access: true

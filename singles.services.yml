@@ -1,0 +1,35 @@
+services:
+  singles:
+    class: Drupal\singles\Service\Singles
+    arguments: ['@entity_type.manager', '@state']
+
+  # Event subscribers.
+  singles.nodetypeform_subscriber:
+    class: Drupal\singles\EventSubscriber\NodeTypeFormEventSubscriber
+    tags:
+      - { name: event_subscriber }
+  singles.nodetypeupdate_subscriber:
+    class: Drupal\singles\EventSubscriber\NodeTypeUpdateEventSubscriber
+    arguments: ['@singles']
+    tags:
+      - { name: event_subscriber }
+
+  # Routing
+  singles.routing.contest:
+    class: Drupal\singles\Routing\NodeRouterSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  # Access
+  singles.access.node.delete:
+    class: Drupal\singles\Access\NodeDeleteAccess
+    arguments: ['@singles']
+    tags:
+      - { name: access_check, applies_to: _singles_node_delete_access_check }
+  singles.access.node.add:
+    class: Drupal\singles\Access\NodeAddAccess
+    arguments: ['@singles', '@current_route_match']
+    tags:
+      - { name: access_check, applies_to: _singles_node_add_access_check }
+
+
