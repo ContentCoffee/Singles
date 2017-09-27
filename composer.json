@@ -3,5 +3,6 @@
   "description": "D8+ module to make snowflake node types.",
   "require": {
     "php": "^5.6 || ^7.0"
-  }
+  },
+  "type": "drupal-module"
 }
