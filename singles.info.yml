@@ -1,6 +1,6 @@
-name: Wieni Singles
+name: Singles
 type: module
 core: 8.x
-package: Wieni
+package: Singles
 dependencies:
   - hook_event_dispatcher
