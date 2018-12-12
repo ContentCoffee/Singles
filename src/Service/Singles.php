@@ -67,7 +67,7 @@ class Singles
                     ->create([
                         'type' => $type->id(),
                         'title' => $type->label(),
-                        'path' =>  ['alias' => '/' . $type->id()]
+                        'path' =>  ['alias' => '/' . str_replace("_", "-", $type->id())]
                     ]);
                 $entity->save();
                 $this->setSnowFlake($type, $entity);
@@ -77,12 +77,14 @@ class Singles
         }
     }
 
-    /**
-     * Returns a loaded single node.
-     *
-     * @param NodeTypeInterface $type
-     * @return bool|\Drupal\Core\Entity\EntityInterface|null
-     */
+  /**
+   * Returns a loaded single node.
+   *
+   * @param NodeTypeInterface $type
+   * @return bool|\Drupal\Core\Entity\EntityInterface|null
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
     public function getSingle(NodeTypeInterface $type)
     {
         if ($id = $this->getSnowFlake($type)) {
@@ -91,10 +93,12 @@ class Singles
         return false;
     }
 
-    /**
-     * @param $bundle
-     * @return bool|\Drupal\Core\Entity\EntityInterface|null
-     */
+  /**
+   * @param $bundle
+   * @return bool|\Drupal\Core\Entity\EntityInterface|null
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
     public function getSingleByBundle($bundle)
     {
         $types = $this->getAllSingles();
